@@ -14,4 +14,11 @@ describe('Employee', () => {
       expect(tempEmp.name).toEqual(name);
     });
   });
+  describe('email', () => {
+    it('should ddisplay the email address', () => {
+      let email = 'someemail';
+      let tempEmail = new Employee(email);
+      expect(tempEmail.name).toEqual(email);
+    });
+  });
 });
