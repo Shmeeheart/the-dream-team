@@ -1,16 +1,16 @@
 const Engineer = require('../lib/Engineer');
 
-const Engineer', () => {
+describe('Engineer', () => {
   describe('object', () => {
     it('should be an object', () => {
       let tempEng = new Engineer();
       expect(typeof tempEng).toEqual('object');
     });
-  });  
+  });
   describe('email', () => {
     it('should display the email', () => {
       let email = 'someemail';
-      let tempEmail = new Email (email);
+      let tempEmail = new Email(email);
       expect(tempEmail.email).toEqual(email);
     });
   });
@@ -21,3 +21,4 @@ const Engineer', () => {
       expect(tempGit.github).toEqual(github);
     });
   });
+});
