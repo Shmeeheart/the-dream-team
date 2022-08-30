@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
+const { writeFile } = require('./utils/write-file');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
@@ -84,3 +84,223 @@ function init() {
     },
   ]);
 }
+// Manager
+function generateManager(name, id, email, officeNumber) {
+  // Creates a manager object
+  let manager = new Manager(name, id, email, officeNumber);
+  // Returns an object
+  return {
+    addStaff: null,
+    staffArray: [manager],
+  };
+}
+
+// Engineer
+function generateEngineer(name, id, email, github, dataObj) {
+  let engineer = new Engineer(name, id, email, github);
+  dataObj.staffArray.push(engineer);
+  return dataObj;
+}
+
+// Intern
+function generateIntern(name, id, email, school, dataObj) {
+  let intern = new Intern(name, id, email, school);
+  dataObj.staffArray.push(intern);
+  return dataObj;
+}
+
+// Add more staff members?
+function addStaff(dataObj) {
+  return (
+    inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'addStaff',
+          message: questions.staff,
+          choices: ['Engineer', 'Intern', 'No'],
+        },
+      ])
+      // If yes, to add new staff
+      .then((answerObj) => {
+        if (answerObj.addStaff === 'Engineer') {
+          return addEngineer(dataObj);
+        } else if (answerObj.addStaff === 'Intern') {
+          return addIntern(dataObj);
+        }
+
+        // If no, the team will be displayed
+        else {
+          return dataObj;
+        }
+      })
+  );
+}
+
+// prompts if adding additional staff as an engineer
+function addEngineer(dataObj) {
+  return (
+    inquirer
+      .prompt([
+        {
+          type: 'input',
+          name: 'name',
+          message: questions.engineer.name,
+          validate: (nameInput) => {
+            if (nameInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+        {
+          type: 'input',
+          name: 'id',
+          message: questions.id,
+          validate: (idInput) => {
+            if (idInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+        {
+          type: 'input',
+          name: 'email',
+          message: questions.email,
+          validate: (emailInput) => {
+            if (emailInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+        {
+          type: 'input',
+          name: 'github',
+          message: questions.engineer.github,
+          validate: (githubInput) => {
+            if (githubInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+      ])
+      // After questions are answered, it will generate the new engineer
+      .then((data) => {
+        return generateEngineer(
+          data.name,
+          data.id,
+          data.email,
+          data.github,
+          dataObj
+        );
+      })
+      .then((data) => {
+        return addStaff(data);
+      })
+  );
+}
+
+// Asks questions to generate the new Intern to staff
+function addIntern(dataObj) {
+  return (
+    inquirer
+      .prompt([
+        {
+          type: 'input',
+          name: 'name',
+          message: questions.intern.name,
+          validate: (nameInput) => {
+            if (nameInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+        {
+          type: 'input',
+          name: 'id',
+          message: questions.id,
+          validate: (idInput) => {
+            if (idInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+        {
+          type: 'input',
+          name: 'email',
+          message: questions.email,
+          validate: (emailInput) => {
+            if (emailInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+        {
+          type: 'input',
+          name: 'school',
+          message: questions.intern.school,
+          validate: (schoolInput) => {
+            if (schoolInput) {
+              return true;
+            } else {
+              console.log(questions.answerValidate);
+              return false;
+            }
+          },
+        },
+      ])
+      // generating new intern information
+      .then((data) => {
+        return generateIntern(
+          data.name,
+          data.id,
+          data.email,
+          data.school,
+          dataObj
+        );
+      })
+      .then((data) => {
+        return addStaff(data);
+      })
+  );
+}
+
+// Initializes app if no other staff to add
+init()
+  .then((answersObj) =>
+    generateManager(
+      answersObj.name,
+      answersObj.id,
+      answersObj.email,
+      answersObj.officeNumber
+    )
+  )
+  .then(addStaff)
+  .then((data) => generatePage(data))
+  .then((md) => writeFile(md))
+  .then((response) => {
+    console.log(response.message);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
