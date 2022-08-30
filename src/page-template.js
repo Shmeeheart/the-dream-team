@@ -1,4 +1,4 @@
-const generateCard(dreamTeam) {
+function generateCard(dreamTeam) {
   return `
         <!DOCTYPE html>
     <html lang="en">
@@ -51,9 +51,7 @@ const generateCard(dreamTeam) {
                 <div class="job-card-body">
                     <ul class="list-group-item">ID: ${managers[i].id}</p>
                     <li class="list-group-item">Email:</li>
-                    <a href="mailto: ${
-                      managers[i].email
-                    }"</a>
+                    <a href="mailto: ${managers[i].email}"</a>
                     <li class="list-group-item">Office Number:</li>
                     <li class="list-group-item">${managers[i].officeNumber}</li> 
                 </div>
@@ -65,7 +63,9 @@ const generateCard(dreamTeam) {
 
   function getEngineerCards(dreamTeam) {
     let engineerCards = ``;
-    const engineers = dreamTeam.filter((Employee) => Employee.role == 'Engineer');
+    const engineers = dreamTeam.filter(
+      (Employee) => Employee.role == 'Engineer'
+    );
     for (let i = 0; i < engineers.length; i++) {
       engineerCards =
         engineerCards +
@@ -78,13 +78,9 @@ const generateCard(dreamTeam) {
                 <div class="job-card-body">
                     <ul class="list-group-item">ID: ${engineers[i].id}</ul>
                     <li class="list-group-item">Email:</li>
-                    <a href="mailto: ${
-                      engineers[i].email
-                    }"</a>
+                    <a href="mailto: ${engineers[i].email}"</a>
                     <li class="list-group-item">GitHub:</li> 
-                    <a href="https://github.com/${
-                      engineers[i].github
-                    }" class="list-group-item">${engineers[i].github}</a>
+                    <a href="https://github.com/${engineers[i].github}" class="list-group-item">${engineers[i].github}</a>
                 </div>
             </div>
             `;
@@ -108,9 +104,7 @@ const generateCard(dreamTeam) {
                     <ul class='list-group'>
                     <li class="list-group-item">ID: ${interns[i].id}</li>
                     <li class="list-group-item">Email:</li>
-                    <a href="mailto: ${
-                      interns[i].email
-                    }"</a>
+                    <a href="mailto: ${interns[i].email}"</a>
                     <li class="list-group-item">School:</li> 
                     <li class="list-group-item">${interns[i].school}</li>
                 </div>
@@ -122,7 +116,9 @@ const generateCard(dreamTeam) {
 
   function getEmployeeCards(dreamTeam) {
     let employeeCards = ``;
-    const employees = dreamTeam.filter((Employee) => Employee.role == 'Employee');
+    const employees = dreamTeam.filter(
+      (Employee) => Employee.role == 'Employee'
+    );
     for (let i = 0; i < employees.length; i++) {
       employeeCards =
         employeeCards +
@@ -136,9 +132,7 @@ const generateCard(dreamTeam) {
                     <ul class='list-group'>
                     <li class="list-group-item">ID: ${employees[i].id}</li>
                     <li class="list-group-item">Email:</li>
-                    <a href="mailto: ${
-                      employees[i].email
-                    }"</a>
+                    <a href="mailto: ${employees[i].email}"</a>
                 </div>
             </div>
             `;
@@ -146,4 +140,4 @@ const generateCard(dreamTeam) {
     return employeeCards;
   }
 }
-module.exports = generateHTML;
+module.exports = generateCard;
