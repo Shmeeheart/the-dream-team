@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    background-color: #35A7FF;
+    height: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: white;
+    font-size: 40px;
+}
+
+.jobs-sections {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-section {
+    width: 100%;
+    background-color: lightgray;
+    border-bottom: 3px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.job-card {
+    background-color: lightgray;
+    box-shadow: 5px 5px darkgray;
+    margin: 20px;
+    height: fit-content;
+    width: fit-content;
+}
+
+.job-card-header {
+    padding: 10px 15px;
+    width: 200px;
+    height: 80px;
+    color: white;
+    align-items: center;
+}
+
+.job-card-body {
+    padding: 10px 15px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+}
+
+.inline-icon {
+    vertical-align: text-bottom;
+    font-size: 24px;
+}
+
+.creds {
+    font-weight: bold;
+    font-size: 24px;
+    overflow: hidden;
+}
+
+.manager {
+    background-color: #35A7FF;
+}
+
+.employee {
+    background-color: #6BF178;
+}
+
+.engineer {
+    background-color: #52489C;
+}
+
+.intern {
+    background-color: #FF5964;
+}
+
