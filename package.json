@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "jest --verbose test/*"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Shmeeheart/the-dream-team#readme",
   "dependencies": {
-    "inquirer": "^9.0.2",
+    "inquirer": "^9.1.0",
     "jest": "^28.1.3"
   }
 }
