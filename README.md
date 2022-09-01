@@ -15,7 +15,7 @@ Sample HTML: ![BC6837E2-9806-45DF-BF2D-B95B642DBAA1](https://user-images.githubu
 
 Github Repository: https://github.com/Shmeeheart/the-dream-team/ 
 
-Walkthrough Video: https://drive.google.com/file/d/17OgHPaFkJA2Z4AhOC3kGpVmSiy_OsAli/view?usp=sharing 
+Walkthrough Video: https://youtu.be/fLyESZktF7k 
 
 Questions: 
 
