@@ -1,4 +1,5 @@
 function generateCard(dreamTeam) {
+  console.log(dreamTeam);
   return `
         <!DOCTYPE html>
     <html lang="en">
@@ -16,29 +17,34 @@ function generateCard(dreamTeam) {
     </head>
     <body>
         <div class="header">
-            <h1 class="title">${dreamTeam[0].teamName()}</h1>
+            <h1 class="title"><h1>
         </div>
         <div class="card-container ">
             <div class="job-section">
-                ${getManagerCards(dreamTeam)}
+                ${getManagerCards(
+                  dreamTeam.filter(
+                    (Employee) => Employee.getRole() == 'Manager'
+                  )
+                )}
             </div>
             <div class="job-section">
-                ${getEngineerCards(dreamTeam)}
-                
+                ${getEngineerCards(
+                  dreamTeam.filter(
+                    (Employee) => Employee.getRole() == 'Engineer'
+                  )
+                )}
             </div>
             <div class="job-section">
-                ${getEmployeeCards(dreamTeam)}
-            </div>
-            <div class="job-section">
-                ${getInternCards(dreamTeam)}
+                ${getInternCards(
+                  dreamTeam.filter((Employee) => Employee.getRole() == 'Intern')
+                )}
             </div>        
         </div>
     </body>
     </html>
     `;
-  function getManagerCards(dreamTeam) {
+  function getManagerCards(managers) {
     let managerCards = ``;
-    const managers = dreamTeam.filter((Employee) => Employee.role == 'Manager');
     for (let i = 0; i < managers.length; i++) {
       managerCards =
         managerCards +
@@ -61,11 +67,8 @@ function generateCard(dreamTeam) {
     return managerCards;
   }
 
-  function getEngineerCards(dreamTeam) {
+  function getEngineerCards(engineers) {
     let engineerCards = ``;
-    const engineers = dreamTeam.filter(
-      (Employee) => Employee.role == 'Engineer'
-    );
     for (let i = 0; i < engineers.length; i++) {
       engineerCards =
         engineerCards +
@@ -88,9 +91,8 @@ function generateCard(dreamTeam) {
     return engineerCards;
   }
 
-  function getInternCards(dreamTeam) {
+  function getInternCards(interns) {
     let internCards = ``;
-    const interns = dreamTeam.filter((Employee) => Employee.role == 'Intern');
     for (let i = 0; i < interns.length; i++) {
       internCards =
         internCards +
@@ -112,32 +114,6 @@ function generateCard(dreamTeam) {
             `;
     }
     return internCards;
-  }
-
-  function getEmployeeCards(dreamTeam) {
-    let employeeCards = ``;
-    const employees = dreamTeam.filter(
-      (Employee) => Employee.role == 'Employee'
-    );
-    for (let i = 0; i < employees.length; i++) {
-      employeeCards =
-        employeeCards +
-        `
-            <div class="job-card">
-                <div class="job-card-header employee">
-                    <h2>${employees[i].name}</h2>
-                    <h2><span class="material-icons inline-icon">glasses</span> Employee</h2>
-                </div>
-                <div class="job-card-body">
-                    <ul class='list-group'>
-                    <li class="list-group-item">ID: ${employees[i].id}</li>
-                    <li class="list-group-item">Email:</li>
-                    <a href="mailto: ${employees[i].email}"</a>
-                </div>
-            </div>
-            `;
-    }
-    return employeeCards;
   }
 }
 module.exports = generateCard;

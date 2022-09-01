@@ -4,6 +4,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const generatePage = require('./src/page-template');
+const teamData = [];
 
 const questions = {
   manager: {
@@ -26,7 +27,7 @@ const questions = {
 };
 
 function init() {
-  return inquirer.createPromptModule([
+  return inquirer.prompt([
     {
       // prompts for manager info
       type: 'input',
@@ -90,6 +91,7 @@ function generateManager(name, id, email, officeNumber) {
   // Creates a manager object
   let manager = new Manager(name, id, email, officeNumber);
   // Returns an object
+  teamData.push(manager);
   return {
     addStaff: null,
     staffArray: [manager],
@@ -100,6 +102,7 @@ function generateManager(name, id, email, officeNumber) {
 function generateEngineer(name, id, email, github, dataObj) {
   let engineer = new Engineer(name, id, email, github);
   dataObj.staffArray.push(engineer);
+  teamData.push(engineer);
   return dataObj;
 }
 
@@ -107,6 +110,7 @@ function generateEngineer(name, id, email, github, dataObj) {
 function generateIntern(name, id, email, school, dataObj) {
   let intern = new Intern(name, id, email, school);
   dataObj.staffArray.push(intern);
+  teamData.push(intern);
   return dataObj;
 }
 
@@ -297,7 +301,7 @@ init()
     )
   )
   .then(addStaff)
-  .then((data) => generatePage(data))
+  .then((data) => generatePage(teamData))
   .then((md) => writeFile(md))
   .then((response) => {
     console.log(response.message);
